@@ -20,37 +20,66 @@ function createRandomNumber(array,cicli,min,max){
     }
 }
 
-function contattore (numSec,container,containerTimer,messaggio){
-    let secondi = numSec;
+function userNumberPrompt(array,numeri) {
+    
 
-    containerTimer.innerHTML = secondi;
-    if (secondi == 0) {
-        container.innerHTML = messaggio;
-    } else {
-        secondi--;
+    for(let i = 0; i <numeri; i++){
+        let numero = parseInt(prompt("Inserisci un numero"));
+        array.push(numero);
     }
 }
 
-function fermaContatore(elemento) {
-    clearInterval(elemento);
+function changeDisplay(ele1,ele2){
+    ele1.style.display = "none";
+    ele2.style.display = "block";
+}
+function numCompare(array1, array2,array3){
+    array1.forEach(value =>{
+        if(array2.includes(value)){
+          array3.push(value);
+        }
+    });
+    console.log(array3);
+}
+
+function drawResult(container, array){
+    let content =  `
+                    <div>
+                        <span>hai indovinato ${array.length} numeri</span>
+                        <div class="box">
+                            ${array}
+                        </div>
+                    </div>
+                    `;
+
+    container.innerHTML = content;
 }
 /********************************************************
  Creazione numeri ed inserimento nell'html
- *******************************************************/
+*******************************************************/
 
 //inizializzo una variabile per scrivere all'interno del div number-box
 
 let numberBoxHtml = document.getElementById('number-box');
+
 //inizializzo l'array vuoto
 const numberToRemember = [];
+const numUser = [];
+const numCorrect = [];
 //riempio l'array con 5 numeri casuali da 0 a 100
 createRandomNumber(numberToRemember,5,0,100)
 //inserisco i numeri all'interno dell'html
 numberBoxHtml.innerHTML = numberToRemember;
 
 let rememberHtml = document.getElementById('remember');
-let timerHtml = document.getElementById('timer');
+let afterRememberHtml = document.getElementById('after-remember');
+let containerHtml = document.getElementById('container')
 
-let timer = setInterval(contattore(30,rememberHtml,timerHtml,"Inserisci i 5 numeri che hai appena visto"),1000)
-fermaContatore(timer);
-
+setTimeout (function (){
+    changeDisplay(rememberHtml,afterRememberHtml);
+    setTimeout(function() {
+        userNumberPrompt(numUser,5); 
+        numCompare(numberToRemember, numUser,numCorrect);
+        drawResult(containerHtml, numCorrect);        
+    }, 250);
+},1000*3)
