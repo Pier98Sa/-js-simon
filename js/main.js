@@ -5,9 +5,8 @@ function numRandom (min, max){
 }
 
 //funzione per creare un array di numeri casuali
-function createRandomNumber(array,cicli,min,max){
-
-    
+function createRandomNumber(cicli,min,max){
+    const array = [];
     for(let i = 0; i < cicli;i++){
 
         let numero = 0 ;
@@ -18,11 +17,13 @@ function createRandomNumber(array,cicli,min,max){
 
         array.push(numero);  
     }
+
+    return array;
 }
 
 //funzione per far inserire i numeri tramite il prompt con validazione del numero in entrata
-function userNumberPrompt(array,numeri) {
-    
+function userNumberPrompt(numeri) {
+    const array = [];
 
     for(let i = 0; i <numeri; i++){
         let numero ;
@@ -32,6 +33,8 @@ function userNumberPrompt(array,numeri) {
 
         array.push(numero);
     }
+
+    return array;
 }
 
 //funzione per cambiare il tipo di display
@@ -39,16 +42,20 @@ function changeDisplay(ele1,ele2){
 
     ele1.style.display='none';
     ele2.style.display='block';
+
+    return true;
 }
 
 //creazione di un array con i numeri uguali di due array messi a confronto
-function numCompare(array1, array2,array3){
-
+function numCompare(array1, array2){
+    let array = [];
     array1.forEach(value =>{
         if(array2.includes(value)){
-          array3.push(value);
+          array.push(value);
         }
     });
+
+    return array;
 }
 //funzione per scrivere il risultato nell'html
 function drawResult(container, array){
@@ -64,9 +71,8 @@ function drawResult(container, array){
                 </div>
                 `;
     container.innerHTML = content;
-    
 
-    
+    return true;
 }
 /********************************************************
  Creazione numeri ed inserimento nell'html
@@ -79,12 +85,8 @@ let rememberHtml = document.getElementById('remember');
 let afterRememberHtml = document.getElementById('after-remember');
 let containerHtml = document.getElementById('container');
 
-//inizializzo gli array vuoto
-const numberToRemember = [];
-const numUser = [];
-const numCorrect = [];
 //riempio l'array con 5 numeri casuali da 0 a 100
-createRandomNumber(numberToRemember,5,0,100);
+const numberToRemember = createRandomNumber(5,0,100);
 //inserisco i numeri all'interno dell'html
 numberBoxHtml.innerHTML = numberToRemember;
 
@@ -99,9 +101,9 @@ setTimeout (function (){
     //funzione che parte in ritardo di 250 millesimi
     setTimeout(function() {
         //faccio inserire i numeri all'utente
-        userNumberPrompt(numUser,5); 
+        const numUser = userNumberPrompt(5); 
         //li comparo per trovare i numeri inseriti correttamente
-        numCompare(numberToRemember, numUser,numCorrect);
+        const numCorrect = numCompare(numberToRemember, numUser);
         //inserisco il risultato nell'html
         drawResult(containerHtml, numCorrect);        
     }, 250);
