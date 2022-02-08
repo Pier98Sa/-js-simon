@@ -37,8 +37,8 @@ function userNumberPrompt(array,numeri) {
 //funzione per cambiare il tipo di display
 function changeDisplay(ele1,ele2){
 
-    ele1.classList.add('none');
-    ele2.classList.remove('none');
+    ele1.style.display='none';
+    ele2.style.display='block';
 }
 
 //creazione di un array con i numeri uguali di due array messi a confronto
