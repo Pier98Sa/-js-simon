@@ -52,16 +52,21 @@ function numCompare(array1, array2,array3){
 }
 //funzione per scrivere il risultato nell'html
 function drawResult(container, array){
-    let content =  `
-                    <div>
-                        <span>Hai indovinato ${array.length} numeri !!!</span>
-                        <div class="box">
-                            ${array}
-                        </div>
-                    </div>
-                    `;
+    //operatore ternario
+    let numero = array.length == 1?"numero":"numeri";
 
+    let content =  `
+                <div>
+                    <span>Hai indovinato ${array.length} ${numero} !!!</span>
+                    <div class="box">
+                        ${array}
+                    </div>
+                </div>
+                `;
     container.innerHTML = content;
+    
+
+    
 }
 /********************************************************
  Creazione numeri ed inserimento nell'html
