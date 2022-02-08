@@ -28,7 +28,7 @@ function userNumberPrompt(array,numeri) {
         let numero ;
         do{
             numero = parseInt(prompt("Inserisci un numero"));
-        }while(isNaN(numero) || numero < 0 || numero >100)//validazione del numero 
+        }while(isNaN(numero) || numero < 0 || numero >100 || array.includes(numero))//validazione del numero 
 
         array.push(numero);
     }
